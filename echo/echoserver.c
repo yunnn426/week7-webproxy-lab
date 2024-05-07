@@ -17,8 +17,9 @@ int main(int argc, char **argv)
     listenfd = Open_listenfd(argv[1]);
 
     while (1) {
+        // sockaddr_in: IPv4, sockaddr_in6: IPv6용
         // sockaddr_storage: 둘다 대응
-        clientlen = sizeof(struct sockaddr_storage); // sockaddr_in: IPv4, sockaddr_in6: IPv6용
+        clientlen = sizeof(struct sockaddr_storage); 
         connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen);
         Getnameinfo((SA *) &clientaddr, clientlen, client_hostname, MAXLINE, client_port, MAXLINE, 0);
         printf("Connected to (%s, %s)\n", client_hostname, client_port);
